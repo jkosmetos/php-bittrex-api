@@ -17,12 +17,12 @@ class MarketApi extends BaseApi
 
     /**
      * MarketApi constructor.
-     * @param string $apiKey
-     * @param null $apiSecret
+     * @param string $key
+     * @param null $secret
      */
-    public function __construct($apiKey, $apiSecret)
+    public function __construct($key, $secret)
     {
-        parent::__construct(self::NAME, $apiKey, $apiSecret);
+        parent::__construct(self::NAME, $key, $secret);
     }
 
     /**
@@ -34,7 +34,7 @@ class MarketApi extends BaseApi
     public function buyLimit($market, $quantity, $rate)
     {
         return parent::send('buylimit', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'market' => $market,
             'quantity' => $quantity,
@@ -51,7 +51,7 @@ class MarketApi extends BaseApi
     public function sellLimit($market, $quantity, $rate)
     {
         return parent::send('selllimit', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'market' => $market,
             'quantity' => $quantity,
@@ -66,7 +66,7 @@ class MarketApi extends BaseApi
     public function cancel($uuid)
     {
         return parent::send('cancel', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'uuid' => $uuid
         ], true);
@@ -79,7 +79,7 @@ class MarketApi extends BaseApi
     public function getOpenOrders($market = null)
     {
         return parent::send('getopenorders', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'market' => $market
         ], true);

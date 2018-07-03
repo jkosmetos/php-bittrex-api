@@ -17,12 +17,12 @@ class AccountApi extends BaseApi
 
     /**
      * AccountApi constructor.
-     * @param string $apiKey
-     * @param null $apiSecret
+     * @param string $key
+     * @param null $secret
      */
-    public function __construct($apiKey, $apiSecret)
+    public function __construct($key, $secret)
     {
-        parent::__construct(self::NAME, $apiKey, $apiSecret);
+        parent::__construct(self::NAME, $key, $secret);
     }
 
     /**
@@ -31,7 +31,7 @@ class AccountApi extends BaseApi
     public function getBalances()
     {
         return parent::send('getbalances', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce
         ], true);
     }
@@ -43,7 +43,7 @@ class AccountApi extends BaseApi
     public function getBalance($currency)
     {
         return parent::send('getbalance', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'currency' => $currency
         ]);
@@ -56,7 +56,7 @@ class AccountApi extends BaseApi
     public function getDepositAddress($currency)
     {
         return parent::send('getdepositaddress', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'currency' => $currency
         ], true);
@@ -72,7 +72,7 @@ class AccountApi extends BaseApi
     public function withdraw($currency, $quantity, $address, $paymentId = null)
     {
         return parent::send('withdraw', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'currency' => $currency,
             'quantity' => $quantity,
@@ -88,7 +88,7 @@ class AccountApi extends BaseApi
     public function getOrder($uuid)
     {
         return parent::send('getorder', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'uuid' => $uuid
         ], true);
@@ -96,12 +96,12 @@ class AccountApi extends BaseApi
 
     /**
      * @param null $market
-     * @return mixed
+     * @return array|mixed
      */
     public function getOrderHistory($market = null)
     {
         return parent::send('getorderhistory', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'market' => $market
         ], true);
@@ -109,12 +109,12 @@ class AccountApi extends BaseApi
 
     /**
      * @param null $currency
-     * @return mixed
+     * @return array|mixed
      */
     public function getWithdrawalHistory($currency = null)
     {
         return parent::send('getwithdrawalhistory', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'currency' => $currency
         ], true);
@@ -122,12 +122,12 @@ class AccountApi extends BaseApi
 
     /**
      * @param null $currency
-     * @return mixed
+     * @return array|mixed
      */
     public function getDepositHistory($currency = null)
     {
         return parent::send('getdeposithistory', [
-            'apikey' => $this->apiKey,
+            'apikey' => $this->key,
             'nonce' => $this->nonce,
             'currency' => $currency
         ], true);

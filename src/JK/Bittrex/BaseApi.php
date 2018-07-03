@@ -36,12 +36,12 @@ abstract class BaseApi
     /**
      * @var string
      */
-    protected $apiKey;
+    protected $key;
 
     /**
      * @var string
      */
-    protected $apiSecret;
+    protected $secret;
 
     /**
      * @var string
@@ -51,13 +51,13 @@ abstract class BaseApi
     /**
      * BaseApi constructor.
      * @param string $group
-     * @param null $apiKey
-     * @param null $apiSecret
+     * @param null $key
+     * @param null $secret
      */
-    public function __construct($group = PublicApi::NAME, $apiKey = null, $apiSecret = null)
+    public function __construct($group = PublicApi::NAME, $key = null, $secret = null)
     {
-        $this->apiKey = $apiKey;
-        $this->apiSecret = $apiSecret;
+        $this->key = $key;
+        $this->secret = $secret;
         $this->nonce = self::getNonce();
         $this->baseUrl = self::getBaseUrl($group);
         $this->client = new Client([
@@ -66,6 +66,7 @@ abstract class BaseApi
     }
 
     /**
+     * @param null $group
      * @return string
      */
     protected static function getBaseUrl($group = null)
@@ -74,11 +75,13 @@ abstract class BaseApi
     }
 
     /**
-     * @return string
+     * @param int $min
+     * @param int $max
+     * @return int
      */
-    protected static function getNonce($length = 32)
+    protected static function getNonce($min = 5, $max = 32)
     {
-        return random_bytes($length);
+        return random_int($min, $max);
     }
 
     /**
@@ -108,7 +111,7 @@ abstract class BaseApi
             if($sign) {
 
                 $options['headers'] = [
-                    'apisign' => self::sign($uri, $this->apiSecret)
+                    'apisign' => self::sign($uri, $this->secret)
                 ];
 
             }
