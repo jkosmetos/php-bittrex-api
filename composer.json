@@ -1,0 +1,21 @@
+{
+    "name": "jkosmetos/php-bittrex-api",
+    "description": "A PHP implementation of the Bittrex API",
+    "license": "MIT",
+    "keywords": ["bittrex", "api", "php", "library"],
+    "authors": [
+        {
+            "name": "John Kosmetos",
+            "email": "jkosmetos@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"JK\\": "src/JK/"}
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "paragonie/random_compat": ">=2",
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
