@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\RequestException;
  * Class BaseApi
  * @package JK\Bittrex
  */
-abstract class BaseApi
+abstract class BaseClient
 {
 
     /**
@@ -54,24 +54,22 @@ abstract class BaseApi
      * @param null $key
      * @param null $secret
      */
-    public function __construct($group = PublicApi::NAME, $key = null, $secret = null)
+    public function __construct($key = null, $secret = null)
     {
         $this->key = $key;
         $this->secret = $secret;
         $this->nonce = self::getNonce();
-        $this->baseUrl = self::getBaseUrl($group);
-        $this->client = new Client([
-            'base_uri' => $this->baseUrl
-        ]);
+        $this->baseUrl = self::getBaseUrl();
+        $this->client = new Client();
     }
 
     /**
      * @param null $group
      * @return string
      */
-    protected static function getBaseUrl($group = null)
+    protected static function getBaseUrl()
     {
-        return (self::BASE_URL . self::VERSION . ($group ? "/{$group}/" : ''));
+        return (self::BASE_URL . self::VERSION);
     }
 
     /**
