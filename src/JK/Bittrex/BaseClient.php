@@ -7,7 +7,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * Class BaseApi
+ * Class BaseClient
  * @package JK\Bittrex
  */
 abstract class BaseClient
@@ -49,7 +49,7 @@ abstract class BaseClient
     protected $nonce;
 
     /**
-     * BaseApi constructor.
+     * BaseClient constructor.
      * @param string $group
      * @param null $key
      * @param null $secret
