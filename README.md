@@ -1,17 +1,17 @@
 # php-bittrex-api
 A PHP implementation of the Bittrex API
 
-### Requirements
+## Requirements
 - php: ^5.6 || ^7.0
 - paragonie/random_compat: >=2
 - guzzlehttp/guzzle: ^6.3
 
-### Installation
+## Installation
 Using Composer
 ```
 composer require jkosmetos/php-bittrex-api
 ```
-#### Examples
+## Examples
 The API `KEY` and `SECRET` can be obtained via your Bittrex profile, under **Settings > Manage API Keys**. For all available methods, consult the [API documentation](https://support.bittrex.com/hc/en-us/articles/115003723911-Developer-s-Guide-API#apireference)
 
 #### Public Methods
@@ -35,7 +35,7 @@ $orders = $client->getOpenOrders(); // Optionally add a market ie: 'ETH-XRP'
 
 var_dump($orders);
 ```
-### Coming soon
+## Coming soon
  - More examples
  - Unit tests
  - Better documentation
