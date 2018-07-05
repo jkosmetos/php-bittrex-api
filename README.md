@@ -2,9 +2,9 @@
 A PHP implementation of the Bittrex API
 
 ## Requirements
-- php: `^5.6 || ^7.0`
-- paragonie/random_compat: `>=2`
-- guzzlehttp/guzzle: `^6.3`
+- php: ^5.6 || ^7.0
+- paragonie/random_compat: >=2
+- guzzlehttp/guzzle: ^6.3
 
 ## Installation
 Using Composer
