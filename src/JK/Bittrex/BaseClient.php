@@ -3,23 +3,21 @@
 namespace JK\Bittrex;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response;
 
 /**
- * Class BaseClient
- * @package JK\Bittrex
+ * Class BaseClient.
  */
 abstract class BaseClient
 {
-
     /**
-     * Base API URL
+     * Base API URL.
      */
     const BASE_URL = 'https://bittrex.com/api/';
 
     /**
-     * Current API Version
+     * Current API Version.
      */
     const VERSION = 'v1.1';
 
@@ -50,9 +48,10 @@ abstract class BaseClient
 
     /**
      * BaseClient constructor.
+     *
      * @param string $group
-     * @param null $key
-     * @param null $secret
+     * @param null   $key
+     * @param null   $secret
      */
     public function __construct($key = null, $secret = null)
     {
@@ -65,16 +64,18 @@ abstract class BaseClient
 
     /**
      * @param null $group
+     *
      * @return string
      */
     protected static function getBaseUrl()
     {
-        return (self::BASE_URL . self::VERSION);
+        return self::BASE_URL.self::VERSION;
     }
 
     /**
      * @param int $min
      * @param int $max
+     *
      * @return int
      */
     protected static function getNonce($min = 5, $max = 32)
@@ -85,6 +86,7 @@ abstract class BaseClient
     /**
      * @param $uri
      * @param $secret
+     *
      * @return string
      */
     protected static function sign($uri, $secret)
@@ -95,38 +97,34 @@ abstract class BaseClient
     /**
      * @param $action
      * @param array $params
-     * @param bool $sign
+     * @param bool  $sign
+     *
      * @return array|mixed
      */
     protected function send($action, $params = [], $sign = false)
     {
         try {
-
             $options = [];
             $query = http_build_query(array_filter($params));
-            $uri = ($this->baseUrl . $action . ($query ? "?{$query}" : ''));
+            $uri = ($this->baseUrl.$action.($query ? "?{$query}" : ''));
 
-            if($sign) {
-
+            if ($sign) {
                 $options['headers'] = [
-                    'apisign' => self::sign($uri, $this->secret)
+                    'apisign' => self::sign($uri, $this->secret),
                 ];
-
             }
 
             $response = $this->client->request('GET', $uri, $options);
 
             return self::parseResponse($response);
-
         } catch (RequestException $e) {
-
             return self::parseException($e);
-
         }
     }
 
     /**
      * @param RequestException $e
+     *
      * @return array
      */
     protected function parseException(RequestException $e)
@@ -134,9 +132,7 @@ abstract class BaseClient
         $payload = ['message' => $e->getMessage(), 'code' => $e->getCode()];
 
         if ($e->hasResponse()) {
-
             $payload['message'] = $e->getResponse()->getReasonPhrase();
-
         }
 
         return $payload;
@@ -144,13 +140,12 @@ abstract class BaseClient
 
     /**
      * @param Response $response
-     * @param bool $assoc
+     * @param bool     $assoc
+     *
      * @return mixed
      */
     protected function parseResponse(Response $response, $assoc = true)
     {
         return json_decode($response->getBody(), $assoc);
     }
-
-
 }
